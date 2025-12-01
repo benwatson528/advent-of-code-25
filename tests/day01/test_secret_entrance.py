@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from main.day01.secret_entrance import solve_p1, solve_p2_slow
+from main.day01.secret_entrance import solve_p1, solve_p2
 
 
 def test_p1_simple():
@@ -13,11 +13,11 @@ def test_p1_real():
 
 
 def test_p2_simple():
-    assert solve_p2_slow(read_input("data/test_input.txt")) == 8
+    assert solve_p2(read_input("data/test_input.txt")) == 8
 
 
 def test_p2_real():
-    assert solve_p2_slow(read_input("data/input.txt")) == 6695
+    assert solve_p2(read_input("data/input.txt")) == 6695
 
 
 def read_input(file_name):

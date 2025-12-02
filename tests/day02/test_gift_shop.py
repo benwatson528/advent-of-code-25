@@ -24,4 +24,3 @@ def read_input(file_name):
     with open(os.path.join(Path(__file__).parent.absolute(), file_name)) as f:
         for l in f.read().split(","):
             yield tuple(int(x) for x in l.split("-"))
-

@@ -17,7 +17,7 @@ def test_p2_simple():
 
 
 def test_p2_real():
-    assert solve_p2(read_input("data/input.txt")) == 17408
+    assert solve_p2(read_input("data/input.txt")) == 172740584266849
 
 
 def read_input(file_name):

@@ -1,23 +1,23 @@
 import os
 from pathlib import Path
 
-from main.day03.lobby import solve_p1, solve_p2
+from main.day03.lobby import solve
 
 
 def test_p1_simple():
-    assert solve_p1(read_input("data/test_input.txt")) == 357
+    assert solve(read_input("data/test_input.txt"), 2) == 357
 
 
 def test_p1_real():
-    assert solve_p1(read_input("data/input.txt")) == 17408
+    assert solve(read_input("data/input.txt"), 2) == 17408
 
 
 def test_p2_simple():
-    assert solve_p2(read_input("data/test_input.txt")) == 3121910778619
+    assert solve(read_input("data/test_input.txt"), 12) == 3121910778619
 
 
 def test_p2_real():
-    assert solve_p2(read_input("data/input.txt")) == 172740584266849
+    assert solve(read_input("data/input.txt"), 12) == 172740584266849
 
 
 def read_input(file_name):

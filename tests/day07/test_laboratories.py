@@ -1,15 +1,23 @@
 import os
 from pathlib import Path
 
-from main.day07.laboratories import solve
+from main.day07.laboratories import solve_p1, solve_p2
 
 
 def test_p1_simple():
-    assert solve(*read_input("data/test_input.txt")) == 21
+    assert solve_p1(*read_input("data/test_input.txt")) == 21
 
 
 def test_p1_real():
-    assert solve(*read_input("data/input.txt")) == 1602
+    assert solve_p1(*read_input("data/input.txt")) == 1602
+
+
+def test_p2_simple():
+    assert solve_p2(*read_input("data/test_input.txt")) == 40
+
+
+def test_p2_real():
+    assert solve_p2(*read_input("data/input.txt")) == 135656430050438
 
 
 def read_input(file_name):

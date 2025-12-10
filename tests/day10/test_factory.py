@@ -17,11 +17,7 @@ def test_p2_simple():
 
 
 def test_p2_real():
-    assert solve_p2(read_input("data/input.txt")) == 20415
-    # 20463 too high
-    # 20461 too high
-    # 20415 too high
-
+    assert solve_p2(read_input("data/input.txt")) == 19857
 
 
 def read_input(file_name):

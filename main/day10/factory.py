@@ -1,7 +1,7 @@
 from collections import deque, defaultdict
 from string import ascii_lowercase
 
-from z3 import Int, Solver
+from z3 import Int, Optimize
 
 
 def solve_p1(manual) -> int:
@@ -11,19 +11,20 @@ def solve_p1(manual) -> int:
 def solve_p2(manual) -> int:
     num_turns = 0
     for m in manual:
-        buttons = m[1]
         components = defaultdict(list)
         joltages = [int(x) for x in m[2].split(",")]
+        letters = set()
         for j in range(len(joltages)):
             components[j] = []
         for i, buttons in enumerate(m[1]):
             for b in buttons:
                 components[int(b)].append(ascii_lowercase[i])
-        num_turns += solve_equations(components, joltages)
+                letters.add(ascii_lowercase[i])
+        num_turns += solve_equations(components, joltages, letters)
     return num_turns
 
 
-def solve_equations(components, joltages):
+def solve_equations(components, joltages, letters):
     a = Int('a')
     b = Int('b')
     c = Int('c')
@@ -51,18 +52,19 @@ def solve_equations(components, joltages):
     y = Int('y')
     z = Int('z')
 
-    # equations = []
-    solver = Solver()
-    for ascii_char in ascii_lowercase[:26]:
-        solver.add(eval(f"{ascii_char} >= 0"))
+    all_vars = [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
+
+    solver = Optimize()
+    for ascii_char in ascii_lowercase[:len(letters)]:
+        char_ = f"{ascii_char} >= 0"
+        solver.add(eval(char_))
     for comp, ls in components.items():
         solver.add(eval(f"{" + ".join(ls)} == {joltages[comp]}"))
-    check = solver.check()
+
+    solver.minimize(sum(all_vars[:len(letters)]))
+    solver.check()
     model = solver.model()
-    ans = 0
-    for model_result in model:
-        ans += int(model[model_result].as_string())
-    return ans  # return sum(int(model[model_result]) for model_result in model)
+    return sum(int(model[model_result].as_string()) for model_result in solver.model())
 
 
 def toggle_p1(expected_indicator, buttons):

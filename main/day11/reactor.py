@@ -27,7 +27,5 @@ def traverse_rec(current, seen_dac, seen_fft):
     if current == "out":
         return 1 if seen_dac and seen_fft else 0
     else:
-        num_paths = 0
-        for output in DEVICES[current]:
-            num_paths += traverse_rec(output, seen_dac or output == "dac", seen_fft or output == "fft")
-        return num_paths
+        return sum(traverse_rec(output, seen_dac or output == "dac", seen_fft or output == "fft") for output in
+                   DEVICES[current])
